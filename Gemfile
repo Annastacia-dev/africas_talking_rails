@@ -2,6 +2,7 @@ source "https://rubygems.org"
 
 ruby "3.1.2"
 
+gem 'africastalking-ruby', '~> 2.2', '>= 2.2.1'
 gem "bootsnap", require: false
 gem "importmap-rails"
 gem "jbuilder"

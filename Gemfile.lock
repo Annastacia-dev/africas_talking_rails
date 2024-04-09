@@ -77,6 +77,8 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.6)
       public_suffix (>= 2.0.2, < 6.0)
+    africastalking-ruby (2.2.1)
+      httparty (>= 0.21.0)
     base64 (0.2.0)
     bigdecimal (3.1.7)
     bindex (0.8.1)
@@ -104,6 +106,9 @@ GEM
     erubi (1.12.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    httparty (0.21.0)
+      mini_mime (>= 1.0.0)
+      multi_xml (>= 0.5.2)
     i18n (1.14.4)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.0.1)
@@ -130,6 +135,7 @@ GEM
     mini_mime (1.1.5)
     minitest (5.22.3)
     msgpack (1.7.2)
+    multi_xml (0.6.0)
     mutex_m (0.2.0)
     net-imap (0.4.10)
       date
@@ -242,6 +248,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  africastalking-ruby (~> 2.2, >= 2.2.1)
   bootsnap
   capybara
   debug
