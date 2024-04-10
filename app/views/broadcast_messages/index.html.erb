@@ -1,0 +1,21 @@
+<div class="w-full">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+   <%= turbo_stream_from "broadcast_messages" %>
+
+    <h1 class="font-bold text-4xl mb-5 capitalize">broadcast messages</h1>
+    <%= turbo_frame_tag "project_form" do %>
+      <div class="mb-5 flex justify-start">
+        <%= render 'form', broadcast_message: @broadcast_message %>
+      </div>
+    <% end %>
+
+    <%= turbo_frame_tag "broadcast_messages" do %>
+      <div id="broadcast_messages" class="min-w-full flex flex-col gap-6 mb-5">
+        <%= render @broadcast_messages %>
+      </div>
+    <% end %>
+
+</div>

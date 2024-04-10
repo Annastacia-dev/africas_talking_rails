@@ -1,0 +1,15 @@
+<%= turbo_frame_tag dom_id(broadcast_message) do %>
+  <div id="<%= dom_id broadcast_message %>" class="flex justify-between bg-violet-200 px-10 items-center">
+    <p class="my-5 mb-3">
+      <strong class="block font-medium mb-1">Message:</strong>
+      <%= broadcast_message.message %>
+    </p>
+
+    <% if action_name != "show" %>
+      <div class="my-5">
+      <%= link_to "Show this broadcast message", broadcast_message, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+      <%= link_to "Edit this broadcast message", edit_broadcast_message_path(broadcast_message), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

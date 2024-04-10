@@ -29,4 +29,45 @@
     prod_api_key: 'your_prod_api_key'
 ```
 
+- Make sure to substitute `your_sandbox_api_key`, `your_prod_username` and `your_prod_api_key` with your actual keys.
+
+- In your Rails application, create a new file in the `config/initializers` directory and name it `africastalking.rb`
+- Let's create an AT module which will handle all Africas Talking related tasks. Create a file in `lib/modules/africastalking.rb` and add the following:
+
+```ruby
+require 'AfricasTalking'
+
+class Africastalking
+  def initialize
+    if Rails.env.production?
+      username = Rails.application.credentials.africas_talking[:prod_username]
+      api_key = Rails.application.credentials.africas_talking[:prod_api_key]
+    else
+      username = Rails.application.credentials.africas_talking[:sandbox_username]
+      api_key = Rails.application.credentials.africas_talking[:sandbox_api_key]
+    end
+
+    at = AfricasTalking::Initialize.new(username, api_key)
+    @sms = at.sms
+  end
+
+  def self.send_sms(**options)
+    new.send_sms(args)
+  end
+
+  def send_sms(**options)
+    message = options[:message]
+    to = options[:to]
+
+    @sms.send(
+      to: to,
+      message: message,
+      retryDurationInHours: 1
+    )
+  end
+
+end
+```
+
+
 
