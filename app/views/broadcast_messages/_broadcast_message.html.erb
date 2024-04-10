@@ -2,15 +2,24 @@
   <div id="<%= dom_id broadcast_message %>" class="flex justify-between bg-violet-200 px-10 items-center">
     <p class="my-5 mb-3">
       <strong class="block font-medium mb-1">Message:</strong>
-      <%= broadcast_message.message %>
+      <%=
+        Liquid::Template.parse(broadcast_message.message).render(
+          "name" => "John Doe",
+        )
+      %>
     </p>
 
     <% if action_name != "show" %>
-      <div class="my-5">
-        <%= link_to send_sms_broadcast_message_path(broadcast_message), class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" do %>
+      <div class="my-5 flex gap-2">
+        <%= button_to send_sms_broadcast_message_path(broadcast_message), class: "rounded-lg py-3 px-5 bg-orange-400 text-white inline-block font-medium" do %>
           <%= broadcast_message.status === 'pending' ? "Send via SMS" : "Resend via SMS" %>
+        <% end %>
+        <%= button_to broadcast_message, method: :delete, data: { confirm: "Are you sure?" }, class: "rounded-lg py-3 px-5 bg-red-400 text-white inline-block font-medium" do %>
+          Delete
         <% end %>
       </div>
     <% end %>
   </div>
 <% end %>
+
+

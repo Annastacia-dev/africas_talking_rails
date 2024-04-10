@@ -14,7 +14,7 @@ class Africastalking
   end
 
   def self.send_sms(**options)
-    new.send_sms(args)
+    new.send_sms(**options)
   end
 
   def send_sms(**options)

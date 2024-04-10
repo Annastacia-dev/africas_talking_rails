@@ -1,4 +1,4 @@
-# Integrating Africas Talking (Bulk SMS) in your Rails Application
+# Integrating Africas Talking (SMS) in your Rails Application
 
 ### Pre-requisites
 - Knowledge of Ruby on Rails

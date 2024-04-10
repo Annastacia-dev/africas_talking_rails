@@ -1,9 +1,23 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+require 'faker'
+
+# Clear existing data
+puts 'Clearing existing data...'
+User.destroy_all
+
+# Generate 10 users
+puts 'Generating seed data...'
+10.times do
+  name = Faker::Name.name
+  # Generate a random 8-digit number
+  random_number = rand(10_000_000..99_999_999)
+  # Concatenate the number with the Kenyan country code (254) and the '7' prefix
+  phone_number = "2547#{random_number}"
+
+  User.create!(
+    name: name,
+    phone_number: phone_number
+  )
+end
+
+puts "Generated #{User.count} users."
+

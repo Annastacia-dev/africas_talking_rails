@@ -4,8 +4,10 @@ ruby "3.1.2"
 
 gem 'africastalking-ruby', '~> 2.2', '>= 2.2.1'
 gem "bootsnap", require: false
+gem 'faker', '~> 3.2'
 gem "importmap-rails"
 gem "jbuilder"
+gem 'liquid', '~> 3.0', '>= 3.0.6'
 gem "pg", "~> 1.1"
 gem "puma", ">= 5.0"
 gem "rails", "~> 7.1.3"
@@ -22,6 +24,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'byebug', '~> 11.1', '>= 11.1.3'
   gem "error_highlight", ">= 0.4.0", platforms: [:ruby]
   gem "web-console"
 end

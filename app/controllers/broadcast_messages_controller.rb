@@ -1,5 +1,5 @@
 class BroadcastMessagesController < ApplicationController
-  before_action :set_broadcast_message, only: %i[ show edit update destroy ]
+  before_action :set_broadcast_message, only: %i[ show edit update destroy send_sms ]
 
   # GET /broadcast_messages or /broadcast_messages.json
   def index
@@ -56,6 +56,16 @@ class BroadcastMessagesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to broadcast_messages_url, notice: "Broadcast message was successfully destroyed." }
+      format.json { head :no_content }
+    end
+  end
+
+  def send_sms
+    BulkSendSms.new(broadcast_message_id: @broadcast_message.id).call
+
+    respond_to do |format|
+      format.html { redirect_to broadcast_messages_url, notice: "Request to send SMS is being processed ..." }
+      format.turbo_stream { render turbo_stream: turbo_stream.replace(@broadcast_message, partial: "broadcast_messages/broadcast_message", locals: { broadcast_message: @broadcast_message }, notice: "Request to send SMS is being processed ...") }
       format.json { head :no_content }
     end
   end
