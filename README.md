@@ -60,14 +60,15 @@ class Africastalking
     to = options[:to]
 
     @sms.send(
-      to: to,
-      message: message,
-      retryDurationInHours: 1
+      'to' => to,
+      'message' => message,
+      'retryDurationInHours' => 1
     )
   end
-
 end
 ```
+- `message` and `to` are `REQUIRED` options while `retryDurationInHours` is optional, it specifies the number of hours for our message to be retried incase it's not delivered.
+- Other optional arguments are `from` which is the senders ID ( by default it is  `'AFRICASTKNG'`) that you can register with Africa's Talking. To see what other options you can pass check [AT's Github Documentation](https://github.com/AfricasTalkingLtd/africastalking-ruby)
 
 
 

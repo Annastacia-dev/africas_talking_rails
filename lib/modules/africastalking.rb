@@ -13,4 +13,19 @@ class Africastalking
     @sms = at.sms
   end
 
+  def self.send_sms(**options)
+    new.send_sms(args)
+  end
+
+  def send_sms(**options)
+    message = options[:message]
+    to = options[:to]
+
+    @sms.send(
+      'from' => '1644',
+      'to' => to,
+      'message' => message,
+      'retryDurationInHours' => 1
+    )
+  end
 end

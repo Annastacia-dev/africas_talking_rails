@@ -4,4 +4,6 @@ class BroadcastMessage < ApplicationRecord
   after_destroy_commit -> { broadcast_remove_to "broadcast_messages" }
 
   validates :message, presence: true
+
+  enum status: { pending: 0, sent: 1 }
 end
