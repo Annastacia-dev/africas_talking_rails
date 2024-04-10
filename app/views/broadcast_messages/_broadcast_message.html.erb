@@ -7,8 +7,9 @@
 
     <% if action_name != "show" %>
       <div class="my-5">
-      <%= link_to "Show this broadcast message", broadcast_message, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-      <%= link_to "Edit this broadcast message", edit_broadcast_message_path(broadcast_message), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+        <%= link_to send_sms_broadcast_message_path(broadcast_message), class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" do %>
+          <%= broadcast_message.status === 'pending' ? "Send via SMS" : "Resend via SMS" %>
+        <% end %>
       </div>
     <% end %>
   </div>
