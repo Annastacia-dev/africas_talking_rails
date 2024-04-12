@@ -11,6 +11,7 @@ class Africastalking
     end
     at = AfricasTalking::Initialize.new(username, api_key)
     @sms = at.sms
+    byebug
   end
 
   def self.send_sms(**options)

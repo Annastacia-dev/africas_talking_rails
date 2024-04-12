@@ -3,10 +3,13 @@ require './lib/modules/africastalking'
 
 class BulkSendSms
 
-  attr_reader :broadcast_message_id, :broadcast_message, :users, :phone_number
+  attr_reader :broadcast_message_id, :broadcast_message, :users, :phone_number, :success_count, :failure_count, :failure_reasons
 
   def initialize(params={})
     @broadcast_message_id = params[:broadcast_message_id] || params['broadcast_message_id']
+    @success_count = 0
+    @failure_count = 0
+    @failure_reasons = []
   end
 
   def call
@@ -15,6 +18,7 @@ class BulkSendSms
     load_broadcast_message
     load_users
     send_sms
+    results
   end
 
   private
@@ -48,10 +52,6 @@ class BulkSendSms
   def send_sms
     return if users.empty?
 
-    success_count = 0
-    failure_count = 0
-    failure_reasons = []
-
     users.each do |user|
       puts "Sending SMS to #{user.name} with phone - #{user.phone_number}"
       request = Africastalking.send_sms(
@@ -66,18 +66,20 @@ class BulkSendSms
       if request[0].status == 'Success'
         success_count += 1
         puts 'SMS sent successfully'
-        return true
       else
         failure_count += 1
         puts 'Failed to send SMS'
         failure_reasons << "#{request[0].status} - #{request[0].number} for #{user.name}"
       end
     end
+  end
 
+  def results
     @broadcast_message.update(status: :sent)
 
     total_count = users.size
     puts "Successfully sent to #{success_count} out of #{total_count} users"
     puts "Failed to send to #{failure_count} users, reasons: #{failure_reasons.join(', ')}"
   end
+
 end
