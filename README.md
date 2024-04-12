@@ -195,12 +195,12 @@ class BulkSendSms
       puts request
 
       if request[0].status == 'Success'
-        success_count += 1
+        @success_count += 1
         puts 'SMS sent successfully'
       else
-        failure_count += 1
+        @failure_count += 1
         puts 'Failed to send SMS'
-        failure_reasons << "#{request[0].status} - #{request[0].number} for #{user.name}"
+        @failure_reasons << "#{request[0].status} - #{request[0].number} for #{user.name}"
       end
     end
   end
@@ -209,8 +209,11 @@ class BulkSendSms
     @broadcast_message.update(status: :sent)
 
     total_count = users.size
-    puts "Successfully sent to #{success_count} out of #{total_count} users"
-    puts "Failed to send to #{failure_count} users, reasons: #{failure_reasons.join(', ')}"
+    puts "Successfully sent to #{@success_count} out of #{total_count} users"
+
+    if failure_count > 0
+      puts "Failed to send to #{@failure_count} users, reasons: #{@failure_reasons.join(', ')}"
+    end
   end
 
 end
@@ -221,6 +224,7 @@ end
 - In the results method, we update the broadcast message status to sent and print out the number of messages sent successfully and the number of messages that failed to send and the reasons for the failure.Instead of logging you can create a report and send it to your email or the notifcation model or any other way you prefer.
 
 #### Conclusion
+
 - You can now send SMS to all the users in your database using Africas Talking API. You can also extend this to send SMS to a specific group of users or to send SMS to a single user. You can also add more options to the send_sms method to allow for more customization of the message.
 - For improvements, we can use a worker to send the messages in the background to avoid blocking the main thread. We can also set up  webhooks to get delivery reports and handle failed messages.
 
