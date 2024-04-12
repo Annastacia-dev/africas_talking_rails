@@ -1,9 +1,9 @@
 # Integrating Africa's Talking (SMS) in your Rails Application
 
-### Pre-requisites
+#### Pre-requisites
 - Knowledge of Ruby on Rails
 
-### Setup
+#### Setup
 - To run this on your local, clone the repository and run `bundle install` to install all the dependencies.
 - Run `rails db:create` to create the database and `rails db:migrate` to run the migrations.
 - Run `rails db:seed` to seed the database with `users` data.
@@ -220,12 +220,12 @@ end
 ```
 - I initiate success_count, failure_count and failure_reasons to keep track of the number of messages sent successfully, the number of messages that failed to send and the reasons for the failure respectively.
 - We then load the broadcast message and users from the database, if the broadcast message is not found or there are no users in the database, we return false.
-- In the send_sms method, we loop through all the users in the database and send the message to each user. We use the Liquid gem to parse the message and render the user's name in the message.We then call the Africastalking send_sms method we defined earlier in the Africastalking module and pass in the message and the user's phone number.
+- In the `send_sms` method, we loop through all the users in the database and send the message to each user. We use the Liquid gem to parse the message and render the user's name in the message.We then call the Africastalking `send_sms` method we defined earlier in the Africastalking module and pass in the message and the user's phone number.
 - In the results method, we update the broadcast message status to sent and print out the number of messages sent successfully and the number of messages that failed to send and the reasons for the failure.Instead of logging you can create a report and send it to your email or the notifcation model or any other way you prefer.
 
 #### Conclusion
 
-- You can now send SMS to all the users in your database using Africas Talking API. You can also extend this to send SMS to a specific group of users or to send SMS to a single user. You can also add more options to the send_sms method to allow for more customization of the message.
+- You can now send SMS to all the users in your database using Africas Talking API. You can also extend this to send SMS to a specific group of users or to send SMS to a single user. You can also add more options to the `send_sms` method to allow for more customization of the message.
 - For improvements, we can use a worker to send the messages in the background to avoid blocking the main thread. We can also set up  webhooks to get delivery reports and handle failed messages.
 
 You can find the full code [here](https://github.com/Annastacia-dev/africas_talking_rails)
