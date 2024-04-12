@@ -1,9 +1,15 @@
-# Integrating Africas Talking (SMS) in your Rails Application
+# Integrating Africa's Talking (SMS) in your Rails Application
 
 ### Pre-requisites
 - Knowledge of Ruby on Rails
 
 ### Setup
+- To run this on your local, clone the repository and run `bundle install` to install all the dependencies.
+- Run `rails db:create` to create the database and `rails db:migrate` to run the migrations.
+- Run `rails db:seed` to seed the database with `users` data.
+- Run `rails s` to start the server and navigate to `http://localhost:3000` to view the application.
+- Generate a `master.key` file and add it to the `config` directory to access the credentials file and save your Africa's Talking API key and username.
+
 
 #### Africa's Talking
 
@@ -54,11 +60,17 @@ NOTE
   @cost="KES 0.8000",
   @messageId="ATXid_e5b768b6d7bb4b5f45c4b40399fd1bab",
   @number="07xxxxxxxx",
-  @status="Success">]
+  @status="Success"
+>]
 ```
 - A failure response might look like this
 ```ruby
- [#<StatusReport:0x00007fe8c9e9b880 @cost="0", @messageId="None", @number="7xxxxxxxx", @status="InvalidPhoneNumber">]
+[#<StatusReport:0x00007fe8c9e9b880
+  @cost="0",
+  @messageId="None",
+  @number="7xxxxxxxx",
+  @status="InvalidPhoneNumber"
+>]
 ```
 - For Kenyan numbers, the valid formats are `2547xxxxxxxx` or `07xxxxxxxx` or `+2547xxxxxxx`
 
