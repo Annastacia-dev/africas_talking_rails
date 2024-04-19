@@ -80,8 +80,8 @@ class BulkSendSms
     total_count = users.size
     puts "Successfully sent to #{@success_count} out of #{total_count} users"
 
-    if failure_count > 0
-      puts "Failed to send to #{@failure_count} users, reasons: #{@failure_reasons.join(', ')}"
+    if @failure_count > 0
+      puts "Failed to send to #{failure_count@failure_count} users, reasons: #{@failure_reasons.join(', ')}"
     end
   end
 end
