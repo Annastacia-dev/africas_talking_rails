@@ -3,7 +3,7 @@ require './lib/modules/africastalking'
 
 class BulkSendSms
 
-  attr_reader :broadcast_message_id, :broadcast_message, :users, :phone_number
+  attr_reader :broadcast_message_id, :broadcast_message, :users
 
   def initialize(params={})
     @broadcast_message_id = params[:broadcast_message_id] || params['broadcast_message_id']

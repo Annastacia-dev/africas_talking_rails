@@ -49,12 +49,12 @@ api_key = Rails.application.credentials.africas_talking[:sandbox_api_key]
 
 @AT=AfricasTalking::Initialize.new(username, api_key)
 
-@AT.sms.send(to: '07xxxxxxxx', message => 'message')
+@AT.sms.send('to' => '07xxxxxxxx', 'message' => 'message')
 ```
 NOTE
 - If you use sandbox credentials, the message isn't actually sent to the phone number, it's just a simulation.You can use the [Launch a Simulator](https://developers.africastalking.com/simulator) feature on the AT dashboard to see the message. Enter the phone number you want to send the message to, connect then send the message from your console.
 
-- A successful response should look lie this
+- A successful response might look like this
 ```ruby
 [#<StatusReport:0x00007fe8c9d47358
   @cost="KES 0.8000",
@@ -97,7 +97,7 @@ class Africastalking
   end
 
   def self.send_sms(**options)
-    new.send_sms(args)
+    new.send_sms(**options)
   end
 
   def send_sms(**options)
@@ -137,7 +137,7 @@ require './lib/modules/africastalking'
 
 class BulkSendSms
 
-  attr_reader :broadcast_message_id, :broadcast_message, :users, :phone_number, :success_count, :failure_count, :failure_reasons
+  attr_reader :broadcast_message_id, :broadcast_message, :users
 
   def initialize(params={})
     @broadcast_message_id = params[:broadcast_message_id] || params['broadcast_message_id']
